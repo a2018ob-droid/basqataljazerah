@@ -5,25 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>طلب عميل - باسقات الجزيرة</title>
     <style>
-        /* إعادة تعيين كل الهوامش */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            margin: 0 !important;
-            padding: 0 !important;
+        body {
             background: #e0e0e0;
             font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+            padding: 10px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* صفحة A4 */
         .page {
             max-width: 210mm;
             width: 100%;
@@ -31,86 +28,60 @@
             margin: 0 auto;
             padding: 0;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
 
-        /* المحتوى مع الهوامش الداخلية 0.5cm فقط */
         .page-content {
-            padding: 0.5cm;
-        }
-
-        /* تنسيق الجدول الرئيسي */
-        .main-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .main-table td, .main-table th {
-            border: 1px solid #aaa;
-            padding: 6px 8px;
-            vertical-align: top;
+            padding: 0.3cm;
         }
 
         .header {
             text-align: center;
-            border-bottom: 2px solid #8B7D3C;
+            border-bottom: 3px solid #8B7D3C;
             padding-bottom: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .logo-area {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            margin-bottom: 5px;
         }
 
         .logo-img {
-            max-width: 60px;
-            max-height: 60px;
+            max-width: 70px;
+            max-height: 70px;
             object-fit: contain;
         }
 
         .header h2 {
-            font-size: 18px;
+            font-size: 20px;
             color: #2c2c2c;
-            margin-top: 5px;
         }
 
-        .employee-section {
-            text-align: center;
-            margin-top: 8px;
-            margin-bottom: 10px;
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
-        .employee-section label {
-            font-weight: bold;
-            font-size: 12px;
-            display: inline-block;
-            margin-left: 8px;
-        }
-
-        .employee-section input {
-            width: 200px;
-            padding: 5px;
-            border: 1px solid #aaa;
-            border-radius: 4px;
-            font-size: 12px;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.3cm;
         }
 
         label {
             font-weight: bold;
-            font-size: 11px;
-            display: block;
-            margin-bottom: 2px;
-            color: #333;
+            font-size: 12px;
+            margin-bottom: 4px;
+            color: #2c2c2c;
         }
 
         input, textarea {
-            padding: 5px;
-            border: 1px solid #aaa;
-            border-radius: 3px;
-            font-size: 12px;
+            padding: 8px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            font-size: 13px;
             font-family: inherit;
             width: 100%;
             box-sizing: border-box;
@@ -118,9 +89,10 @@
         }
 
         input[readonly] {
-            background-color: #f9f9f9;
+            background-color: #f5f5f5;
         }
 
+        /* حاوية التاريخ - خانة واحدة مع زر التقويم */
         .date-wrapper {
             position: relative;
             display: flex;
@@ -129,196 +101,226 @@
 
         .date-wrapper input[type="text"] {
             width: 100%;
-            padding-left: 30px;
+            padding-left: 40px;
         }
 
         .date-wrapper input[type="date"] {
             position: absolute;
             left: 0;
             top: 0;
-            width: 30px;
+            width: 40px;
             height: 100%;
             opacity: 0;
             cursor: pointer;
+            direction: ltr;
         }
 
         .calendar-icon {
             position: absolute;
-            left: 8px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             pointer-events: none;
-            font-size: 12px;
+            font-size: 16px;
+            color: #8B7D3C;
         }
 
-        .wa-box {
-            display: none;
-            text-align: center;
-            margin-top: 5px;
-            padding: 3px;
-            background: #f5f5f5;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .wa-box span {
-            font-size: 9px;
+        .section {
             font-weight: bold;
-            display: block;
-        }
-
-        .wa-box img {
-            width: 45px;
-            height: 45px;
-            margin: 2px auto;
+            border-right: 4px solid #8B7D3C;
+            padding: 6px 10px;
+            background: #f5f0e6;
+            margin: 12px 0 8px 0;
+            font-size: 14px;
+            border-radius: 0 8px 8px 0;
         }
 
         .img-box {
             display: flex;
-            gap: 6px;
+            gap: 12px;
             flex-wrap: wrap;
-            min-height: 70px;
-            border: 1px dashed #aaa;
-            padding: 6px;
-            background: #fefefe;
+            min-height: 100px;
+            border: 2px dashed #ccc;
+            padding: 12px;
+            border-radius: 12px;
+            background: #fafafa;
         }
 
         .img-wrapper {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 130px;
+            height: 130px;
         }
 
         .img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 3px;
+            border-radius: 10px;
             border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .delete-img {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -8px;
+            right: -8px;
             background: red;
             color: white;
-            width: 18px;
-            height: 18px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        .check-group {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 5px;
         }
 
         .checkbox-box {
+            padding: 8px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            gap: 8px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            background: #f5f5f5;
         }
 
         .checkbox-box input {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             margin: 0;
+        }
+
+        .wa-box {
+            display: none;
+            text-align: center;
+            margin-top: 8px;
+            padding: 6px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            border: 1px solid #25D366;
+        }
+
+        .wa-box span {
+            font-size: 10px;
+            font-weight: bold;
+            color: #25D366;
+        }
+
+        .wa-box img {
+            width: 60px;
+            height: 60px;
+            margin: 5px auto;
         }
 
         .payment-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 5px;
+            gap: 10px;
+            margin-top: 8px;
         }
 
-        .signature {
+        .signature-area {
             margin-top: 15px;
+            border-top: 1px solid #000;
+            padding-top: 10px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .btn-print {
             width: 100%;
-            padding: 8px;
-            background: #555;
+            padding: 12px;
+            background: #8B7D3C;
             color: white;
             border: none;
             margin-top: 15px;
+            font-weight: bold;
             cursor: pointer;
-            border-radius: 4px;
-            font-size: 13px;
+            border-radius: 30px;
+            font-size: 15px;
         }
 
         @media (max-width: 600px) {
             .page-content {
-                padding: 0.4cm;
+                padding: 0.2cm;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
             }
             .img-wrapper {
-                width: 65px;
-                height: 65px;
+                width: 100px;
+                height: 100px;
             }
-            .employee-section input {
-                width: 160px;
+            .delete-img {
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+                top: -6px;
+                right: -6px;
             }
         }
 
-        /* ================= إعدادات الطباعة النهائية ================= */
         @media print {
-            /* إلغاء كل الهوامش تماماً */
-            html, body {
-                margin: 0 !important;
-                padding: 0 !important;
-                background: white !important;
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
             }
-            
             .page {
-                margin: 0 !important;
-                padding: 0 !important;
-                box-shadow: none !important;
-                max-width: 100% !important;
+                padding: 0;
+                margin: 0;
+                box-shadow: none;
+                max-width: 100%;
+                page-break-after: avoid;
+                page-break-inside: avoid;
             }
-            
-            /* فقط هذه الهوامش الداخلية 0.5cm */
             .page-content {
-                padding: 0.5cm !important;
-                margin: 0 !important;
+                padding: 0.3cm;
             }
-            
-            /* إخفاء العناصر غير المرغوب طباعتها */
             .no-print {
                 display: none !important;
             }
-            
             .delete-img {
                 display: none !important;
             }
-            
+            .img-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            .checkbox-box {
+                border: 1px solid #000;
+                background: transparent !important;
+                color: black !important;
+            }
             .btn-print {
-                display: none !important;
+                display: none;
             }
-            
             .date-wrapper input[type="date"] {
-                display: none !important;
+                display: none;
             }
-            
             .calendar-icon {
-                display: none !important;
+                display: none;
             }
-            
-            /* إلغاء أي هوامش إضافية من المتصفح */
             @page {
-                margin: 0 !important;
-                size: A4 !important;
+                margin: 0.3cm;
+                size: A4;
             }
         }
     </style>
@@ -331,107 +333,99 @@
             <div class="logo-area">
                 <img src="logo.png" alt="شعار الشركة" class="logo-img" onerror="this.style.display='none'">
             </div>
-            <h2>طلبات العملاء</h2>
+            <h2>طلب العميل</h2>
         </div>
 
-        <div class="employee-section">
-            <label>👨‍💼 الموظف المسؤول:</label>
-            <input type="text" id="employeeName" placeholder="اسم الموظف">
+        <div class="grid">
+            <div class="form-group">
+                <label>📅 تاريخ اليوم:</label>
+                <input type="text" id="todayDate" readonly>
+            </div>
+            <div class="form-group">
+                <label>📦 تاريخ الاستلام:</label>
+                <div class="date-wrapper">
+                    <input type="text" id="deliveryDateDisplay" readonly placeholder="اختر التاريخ من التقويم">
+                    <input type="date" id="deliveryDatePicker" class="no-print">
+                    <span class="calendar-icon">📅</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>👤 اسم العميل:</label>
+                <input type="text" id="customerName" placeholder="الاسم الكامل">
+            </div>
+            <div class="form-group">
+                <label>📱 الجوال:</label>
+                <input type="tel" id="customerPhone" maxlength="10" placeholder="05xxxxxxxx">
+                <div class="wa-box" id="waContainer">
+                    <span>📱 باركود واتساب العميل</span>
+                    <img id="waQR" alt="QR Code">
+                </div>
+            </div>
         </div>
 
-        <table class="main-table">
-            <tr>
-                <td style="width: 50%;">
-                    <label>📅 تاريخ اليوم</label>
-                    <input type="text" id="todayDate" readonly>
-                </td>
-                <td style="width: 50%;">
-                    <label>📦 تاريخ الاستلام</label>
-                    <div class="date-wrapper">
-                        <input type="text" id="deliveryDateDisplay" readonly placeholder="اختر التاريخ">
-                        <input type="date" id="deliveryDatePicker" class="no-print">
-                        <span class="calendar-icon">📅</span>
+        <div class="section">🥘 الصواني</div>
+        <input type="file" accept="image/*" id="trayUpload" class="no-print" multiple>
+        <div class="img-box" id="trayPreview"></div>
+
+        <div class="section">🍽️ الأصناف (صور)</div>
+        <input type="file" accept="image/*" id="itemsUpload" class="no-print" multiple>
+        <div class="img-box" id="itemsPreview"></div>
+
+        <!-- تم إلغاء قسم "الأصناف كتابياً" -->
+
+        <div class="section">📌 الملاحظات</div>
+        <textarea rows="4" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
+
+        <div class="grid">
+            <div class="form-group">
+                <label>👨‍💼 الموظف المسؤول:</label>
+                <input type="text" id="employeeName" placeholder="اسم الموظف">
+            </div>
+            <div class="form-group">
+                <label>🚚 طريقة الاستلام:</label>
+                <div class="check-grid">
+                    <div class="checkbox-box" onclick="selectDelivery(this, 'store')">
+                        <input type="radio" name="delivery" class="no-print"> استلام بالمعرض
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>👤 اسم العميل</label>
-                    <input type="text" id="customerName" placeholder="الاسم الكامل">
-                </td>
-                <td>
-                    <label>📱 رقم العميل</label>
-                    <input type="tel" id="customerPhone" maxlength="10" placeholder="05xxxxxxxx">
-                    <div class="wa-box" id="waContainer">
-                        <span>📱 باركود الواتس اب</span>
-                        <img id="waQR" alt="QR Code">
+                    <div class="checkbox-box" onclick="selectDelivery(this, 'delivery')">
+                        <input type="radio" name="delivery" class="no-print"> توصيل
                     </div>
-                </td>
-            </tr>
-         </table>
-
-        <div style="margin-top: 10px;">
-            <label>🥘 صور الصواني</label>
-            <input type="file" accept="image/*" id="trayUpload" class="no-print" capture="environment" multiple>
-            <div class="img-box" id="trayPreview"></div>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <label>🍽️ صور الأصناف المختارة</label>
-            <input type="file" accept="image/*" id="itemsUpload" class="no-print" capture="environment" multiple>
-            <div class="img-box" id="itemsPreview"></div>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <label>📝 الأصناف المختارية كتابياً</label>
-            <textarea rows="2" id="itemsText" placeholder="اكتب الأصناف المطلوبة..."></textarea>
-        </div>
-
-        <div style="margin-top: 8px;">
-            <label>📌 ملاحظات</label>
-            <textarea rows="2" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
-        </div>
-
-        <div style="margin-top: 10px;">
-            <label>🚚 طريقة الاستلام</label>
-            <div class="check-group">
-                <label class="checkbox-box" onclick="selectDelivery(this, 'store')">
-                    <input type="radio" name="delivery" class="no-print"> استلام بالمعرض
-                </label>
-                <label class="checkbox-box" onclick="selectDelivery(this, 'delivery')">
-                    <input type="radio" name="delivery" class="no-print"> توصيل
-                </label>
+                </div>
             </div>
         </div>
 
-        <div style="margin-top: 10px;">
-            <label>💰 عملية الدفع</label>
-            <div class="check-group">
-                <label class="checkbox-box" onclick="selectPayment(this, 'full')">
-                    <input type="radio" name="pay" class="no-print"> كامل المبلغ
-                </label>
-                <label class="checkbox-box" onclick="selectPayment(this, 'partial')">
-                    <input type="radio" name="pay" class="no-print"> جزء من المبلغ
-                </label>
+        <div class="section">💰 عملية الدفع</div>
+        <div class="check-grid">
+            <div class="checkbox-box" onclick="selectPayment(this, 'full')">
+                <input type="radio" name="pay" class="no-print"> كامل المبلغ
             </div>
-            <div id="remBox" class="payment-row" style="display:none;">
-                <label style="font-weight: bold;">المتبقي:</label>
-                <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي" style="width: 180px;">
+            <div class="checkbox-box" onclick="selectPayment(this, 'partial')">
+                <input type="radio" name="pay" class="no-print"> جزء من المبلغ
             </div>
         </div>
-
-        <div class="signature">
-            ✍️ توقيع العميل: ................................................................
+        <div id="remBox" class="payment-row" style="display:none;">
+            <label style="font-weight: bold;">المتبقي:</label>
+            <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي" style="width: 200px;">
         </div>
 
-        <button class="btn-print no-print" onclick="window.print()">🖨️ طباعة</button>
+        <div class="signature-area">
+            ✍️ توقيع العميل: ................................................
+        </div>
+
+        <button class="btn-print no-print" onclick="window.print()">🖨️ طباعة النموذج</button>
     </div>
 </div>
 
 <script>
+    // ================= أيام الأسبوع =================
     const weekDays = {
-        'Sunday': 'الأحد', 'Monday': 'الاثنين', 'Tuesday': 'الثلاثاء',
-        'Wednesday': 'الأربعاء', 'Thursday': 'الخميس', 'Friday': 'الجمعة', 'Saturday': 'السبت'
+        'Sunday': 'الأحد',
+        'Monday': 'الاثنين',
+        'Tuesday': 'الثلاثاء',
+        'Wednesday': 'الأربعاء',
+        'Thursday': 'الخميس',
+        'Friday': 'الجمعة',
+        'Saturday': 'السبت'
     };
 
     function getDayName(date) {
@@ -439,7 +433,8 @@
         return weekDays[day] || day;
     }
 
-    function formatDateWithDay(date) {
+    // ================= تنسيق التاريخ مع اليوم =================
+    function formatGregorianDateWithDay(date) {
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
@@ -449,97 +444,140 @@
         return `${dayName} - ${dayStr}/${monthStr}/${year}`;
     }
 
+    // ================= تاريخ اليوم =================
     const today = new Date();
-    document.getElementById('todayDate').value = formatDateWithDay(today);
+    const todayField = document.getElementById('todayDate');
+    if (todayField) {
+        todayField.value = formatGregorianDateWithDay(today);
+    }
 
+    // ================= تاريخ الاستلام =================
     const deliveryPicker = document.getElementById('deliveryDatePicker');
     const deliveryDisplay = document.getElementById('deliveryDateDisplay');
-    const todayStr = today.toISOString().split('T')[0];
-    deliveryPicker.value = todayStr;
-    deliveryDisplay.value = formatDateWithDay(today);
     
-    deliveryPicker.addEventListener('change', function() {
-        if (this.value) {
-            const selectedDate = new Date(this.value);
-            deliveryDisplay.value = formatDateWithDay(selectedDate);
-        }
-    });
+    const todayStr = today.toISOString().split('T')[0];
+    if (deliveryPicker) {
+        deliveryPicker.value = todayStr;
+        deliveryDisplay.value = formatGregorianDateWithDay(today);
+    }
+    
+    if (deliveryPicker) {
+        deliveryPicker.addEventListener('change', function() {
+            if (this.value) {
+                const selectedDate = new Date(this.value);
+                deliveryDisplay.value = formatGregorianDateWithDay(selectedDate);
+            } else {
+                deliveryDisplay.value = '';
+            }
+        });
+    }
 
+    // ================= باركود واتساب =================
     const phoneInput = document.getElementById('customerPhone');
     const waContainer = document.getElementById('waContainer');
     const waQR = document.getElementById('waQR');
     
-    phoneInput.addEventListener('input', function() {
-        let value = this.value.replace(/[^0-9]/g, '');
-        this.value = value;
-        
-        if (value.length === 10 && value.startsWith('05')) {
-            const internationalNumber = '966' + value.substring(1);
-            const waLink = `https://wa.me/${internationalNumber}`;
-            waQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=${encodeURIComponent(waLink)}`;
-            waContainer.style.display = 'block';
-        } else {
-            waContainer.style.display = 'none';
-            waQR.src = '';
-        }
-    });
-
-    function setupImageUpload(inputId, previewId) {
-        const input = document.getElementById(inputId);
-        const preview = document.getElementById(previewId);
-        
-        input.addEventListener('change', function(e) {
-            const files = Array.from(e.target.files);
-            files.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'img-wrapper';
-                    const img = document.createElement('img');
-                    img.src = ev.target.result;
-                    const deleteBtn = document.createElement('div');
-                    deleteBtn.className = 'delete-img';
-                    deleteBtn.innerHTML = '✕';
-                    deleteBtn.onclick = () => wrapper.remove();
-                    wrapper.appendChild(img);
-                    wrapper.appendChild(deleteBtn);
-                    preview.appendChild(wrapper);
-                };
-                reader.readAsDataURL(file);
-            });
-            input.value = '';
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            this.value = value;
+            
+            if (value.length === 10 && value.startsWith('05')) {
+                const internationalNumber = '966' + value.substring(1);
+                const waLink = `https://wa.me/${internationalNumber}`;
+                waQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(waLink)}`;
+                waContainer.style.display = 'block';
+            } else {
+                waContainer.style.display = 'none';
+                waQR.src = '';
+            }
         });
     }
-    
-    setupImageUpload('trayUpload', 'trayPreview');
-    setupImageUpload('itemsUpload', 'itemsPreview');
 
-    document.addEventListener('DOMContentLoaded', function() {
+    // ================= دعم الكاميرا لأندرويد وأيفون =================
+    function setupCameraSupport() {
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        const cameraInputs = document.querySelectorAll('input[type="file"][capture]');
+        const cameraInputs = document.querySelectorAll('input[type="file"][accept*="image"]');
         
-        cameraInputs.forEach(function(input) {
+        cameraInputs.forEach(input => {
             if (!isIOS) {
                 input.setAttribute('capture', 'environment');
             }
         });
-    });
+    }
 
+    // ================= رفع الصور مع حذف =================
+    function setupImageUpload(inputId, previewId) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+        
+        if (input && preview) {
+            input.addEventListener('change', function(e) {
+                const files = Array.from(e.target.files);
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'img-wrapper';
+                        
+                        const img = document.createElement('img');
+                        img.src = ev.target.result;
+                        
+                        const deleteBtn = document.createElement('div');
+                        deleteBtn.className = 'delete-img';
+                        deleteBtn.innerHTML = '✕';
+                        deleteBtn.onclick = function() {
+                            wrapper.remove();
+                        };
+                        
+                        wrapper.appendChild(img);
+                        wrapper.appendChild(deleteBtn);
+                        preview.appendChild(wrapper);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                input.value = '';
+            });
+        }
+    }
+    
+    setupImageUpload('trayUpload', 'trayPreview');
+    setupImageUpload('itemsUpload', 'itemsPreview');
+    setupCameraSupport();
+
+    // ================= اختيارات الاستلام =================
     function selectDelivery(element, type) {
-        const radios = document.querySelectorAll('.checkbox-box input[name="delivery"]');
-        radios.forEach(radio => radio.checked = false);
+        const allBoxes = document.querySelectorAll('.check-grid .checkbox-box');
+        allBoxes.forEach(box => {
+            box.style.backgroundColor = '#f5f5f5';
+            box.style.color = 'black';
+            const radio = box.querySelector('input');
+            if (radio) radio.checked = false;
+        });
+        element.style.backgroundColor = type === 'store' ? '#e8f5e9' : '#ffebee';
+        element.style.color = type === 'store' ? 'green' : 'red';
         const radio = element.querySelector('input');
         if (radio) radio.checked = true;
     }
 
+    // ================= اختيارات الدفع =================
     function selectPayment(element, type) {
-        const radios = document.querySelectorAll('.checkbox-box input[name="pay"]');
-        radios.forEach(radio => radio.checked = false);
+        const allBoxes = document.querySelectorAll('.check-grid .checkbox-box');
+        allBoxes.forEach(box => {
+            box.style.backgroundColor = '#f5f5f5';
+            box.style.color = 'black';
+            const radio = box.querySelector('input');
+            if (radio) radio.checked = false;
+        });
+        element.style.backgroundColor = type === 'full' ? '#e8f5e9' : '#ffebee';
+        element.style.color = type === 'full' ? 'green' : 'red';
         const radio = element.querySelector('input');
         if (radio) radio.checked = true;
         
         const remBox = document.getElementById('remBox');
-        remBox.style.display = type === 'partial' ? 'flex' : 'none';
+        if (remBox) {
+            remBox.style.display = type === 'partial' ? 'flex' : 'none';
+        }
     }
 </script>
 </body>
