@@ -1,339 +1,167 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>باسقات الجزيرة للتمور والحلويات - عبدالله البلوشي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب عميل - باسقات الجزيرة</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        body { font-family: sans-serif; background: #fff; margin: 0; padding: 5px; font-size: 13px; }
+        .page { max-width: 600px; margin: auto; padding: 10px; border: 1px solid #ccc; }
+        .header { text-align: center; border-bottom: 2px solid #8c7b5a; padding-bottom: 5px; }
+        .header img { max-width: 80px; }
+        .header h2 { margin: 5px 0; font-size: 16px; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+        .form-group { display: flex; flex-direction: column; }
+        label { font-weight: bold; font-size: 11px; margin-bottom: 2px; }
+        input[type="text"], textarea { padding: 5px; border: 1px solid #999; width: 100%; box-sizing: border-box; }
+        
+        .date-input-wrapper { position: relative; }
+        .date-input-wrapper input[type="date"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 
-        body {
-            background: linear-gradient(135deg, #1e2a1a, #3a4d30);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-            direction: rtl;
-            padding: 20px;
-        }
-
-        .business-card {
-            width: 650px;
-            max-width: 100%;
-            background: #FFFFFF;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            transition: transform 0.25s ease;
-        }
-
-        .business-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, #8B7D3C, #C9A96E);
-            padding: 22px 25px;
-            text-align: center;
-        }
-
-        .logo-text {
-            font-size: 1.9rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: white;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-
-        .logo-sub {
-            font-size: 0.8rem;
-            color: rgba(255,255,240,0.95);
-            margin-top: 6px;
-            font-weight: 400;
-        }
-
-        .card-body {
-            padding: 28px 30px;
-            background: #FFFFFF;
-        }
-
-        .contact-name {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #2c2c2c;
-            border-right: 5px solid #8B7D3C;
-            padding-right: 16px;
-            margin-bottom: 8px;
-        }
-
-        .job-title {
-            font-size: 1rem;
-            color: #8B7D3C;
-            font-weight: 600;
-            margin-bottom: 25px;
-            padding-right: 21px;
-            letter-spacing: 0.3px;
-        }
-
-        .info-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .info-icon {
-            width: 44px;
-            height: 44px;
-            background: #F5F0E6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8B7D3C;
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .info-text {
-            flex: 1;
-            font-size: 1rem;
-            color: #2d2d2d;
-            text-decoration: none;
-            font-weight: 500;
-            word-break: break-word;
-        }
-
-        .info-text a {
-            text-decoration: none;
-            color: #2d2d2d;
-            transition: color 0.2s;
-        }
-
-        .info-text a:hover {
-            color: #C9A96E;
-        }
-
-        .whatsapp-btn {
-            background-color: #25D366;
-            color: white !important;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-        }
-
-        .whatsapp-btn:hover {
-            background-color: #1da15a;
-        }
-
-        .vcf-btn {
-            background-color: #8B7D3C;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-
-        .vcf-btn:hover {
-            background-color: #6b5e2e;
-            transform: scale(0.97);
-        }
-
-        .website-link {
-            background: none;
-            border: 1px solid #8B7D3C;
-            color: #8B7D3C !important;
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-        }
-
-        .website-link:hover {
-            background: #C9A96E20;
-            border-color: #C9A96E;
-        }
-
-        hr {
-            margin: 20px 0;
-            border: none;
-            height: 2px;
-            background: linear-gradient(to left, #e0d5c0, #8B7D3C, #e0d5c0);
-            border-radius: 5px;
-        }
-
-        .footer-note {
-            font-size: 0.7rem;
-            color: #aaa;
-            text-align: center;
-            margin-top: 12px;
-        }
-
-        .android-message {
-            background: #fff3e0;
-            padding: 15px;
-            border-radius: 16px;
-            margin: 15px 0;
-            border-right: 4px solid #8B7D3C;
-            display: none;
-        }
-
-        .android-message.show {
-            display: block;
-        }
-
-        .android-message p {
-            color: #2c2c2c;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 500px) {
-            .card-body {
-                padding: 20px;
-            }
-            .contact-name {
-                font-size: 1.4rem;
-            }
-            .info-icon {
-                width: 38px;
-                height: 38px;
-            }
-        }
+        .section { font-weight: bold; border-right: 4px solid #8c7b5a; padding: 3px 6px; background: #f9f9f9; margin: 10px 0; font-size: 12px; }
+        .img-box { display: flex; gap: 5px; min-height: 50px; flex-wrap: wrap; }
+        .img-box img { width: 50px; height: 50px; object-fit: cover; border: 1px solid #ccc; }
+        
+        .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2px; }
+        .checkbox-box { padding: 5px; border: 1px solid #999; display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: bold; background: #f5f5f5; }
+        .checkbox-box input { margin: 0; width: auto; }
+        
+        .payment-row { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
+        .signature-area { margin-top: 20px; display: flex; justify-content: space-between; border-top: 1px solid #000; padding-top: 10px; font-weight: bold; }
+        
+        .btn-print { width: 100%; padding: 10px; background: #8c7b5a; color: #fff; border: none; margin-top: 15px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        @media print { .no-print { display: none !important; } }
     </style>
 </head>
 <body>
-    <div class="business-card">
-        <div class="card-header">
-            <div class="logo-text">باسقات الجزيرة</div>
-            <div class="logo-sub">BASQAT ALJAZEERA</div>
+
+<div class="page">
+    <div class="header">
+        <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+        <h2>طلب العميل</h2>
+        <p style="font-size: 11px; color: #8c7b5a; margin-top: 3px;">باسقات الجزيرة للتمور والحلويات</p>
+    </div>
+
+    <div class="grid">
+        <div class="form-group"><label>تاريخ اليوم:</label><input type="text" id="today-date" readonly></div>
+        <div class="form-group">
+            <label>تاريخ الاستلام:</label>
+            <div class="date-input-wrapper">
+                <input type="text" id="delivery-date-display" placeholder="اختر التاريخ..." readonly style="background:#f5f5f5;">
+                <input type="date" class="no-print" onchange="updateDeliveryDate(this.value)">
+            </div>
         </div>
-        <div class="card-body">
-            <div class="contact-name">عبدالله البلوشي</div>
-            <div class="job-title">منسق المعرض</div>
+        <div class="form-group"><label>اسم العميل:</label><input type="text" id="customerName"></div>
+        <div class="form-group">
+            <label>الجوال:</label>
+            <input type="tel" id="customerPhone" maxlength="10" placeholder="05xxxxxxxx">
+        </div>
+    </div>
 
-            <div class="info-row">
-                <div class="info-icon"><i class="fas fa-address-card"></i></div>
-                <div class="info-text">
-                    <button class="vcf-btn" id="saveVcfBtn">
-                        <i class="fas fa-download"></i> حفظ جهة اتصال (VCF)
-                    </button>
-                </div>
-            </div>
+    <div class="section">الصواني</div>
+    <input type="file" accept="image/*" id="tray-upload" class="no-print" multiple>
+    <div class="img-box" id="tray-preview"></div>
 
-            <div id="androidMessage" class="android-message">
-                <p><i class="fas fa-info-circle"></i> <strong>طريقة حفظ جهة الاتصال على أندرويد:</strong></p>
-                <p>1️⃣ سيتم تحميل الملف إلى مجلد "Downloads"<br>
-                2️⃣ افتح تطبيق <strong>جهات الاتصال</strong> ← <strong>استيراد</strong> ← اختر الملف المحمّل</p>
-            </div>
+    <div class="section">الأصناف (صور)</div>
+    <input type="file" accept="image/*" id="items-upload" class="no-print" multiple>
+    <div class="img-box" id="items-preview"></div>
 
-            <div class="info-row">
-                <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
-                <div class="info-text">
-                    <a href="https://wa.me/966555822559?text=مرحباً%20عبدالله،%20تواصلت%20معك%20من%20البطاقة%20التعريفية" target="_blank" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> واتساب المباشر
-                    </a>
-                </div>
-            </div>
+    <div class="section">الأصناف (كتابياً)</div>
+    <textarea rows="3" id="itemsText"></textarea>
 
-            <div class="info-row">
-                <div class="info-icon"><i class="far fa-envelope"></i></div>
-                <div class="info-text">
-                    <a href="mailto:abdullah@basqat.com.sa">abdullah@basqat.com.sa</a>
-                </div>
-            </div>
+    <div class="section">الملاحظات</div>
+    <textarea rows="2" id="notes"></textarea>
 
-            <div class="info-row">
-                <div class="info-icon"><i class="fas fa-globe"></i></div>
-                <div class="info-text">
-                    <a href="https://basiqataljazira.com/ar" target="_blank" class="website-link">
-                        <i class="fas fa-external-link-alt"></i> اكتشف أكثر
-                    </a>
-                </div>
-            </div>
-
-            <hr />
-            <div class="footer-note">
-                <i class="fas fa-tree"></i> باسقات الجزيرة للتمور والحلويات
+    <div class="grid">
+        <div class="form-group"><label>الموظف المسؤول:</label><input type="text" id="employeeName"></div>
+        <div class="form-group"><label style="color: #8c7b5a;">طريقة الاستلام:</label>
+            <div class="check-grid">
+                <label class="checkbox-box" onclick="selectDelivery(this, 'store')">
+                    <input type="radio" name="delivery" class="no-print"> استلام بالمعرض
+                </label>
+                <label class="checkbox-box" onclick="selectDelivery(this, 'delivery')">
+                    <input type="radio" name="delivery" class="no-print"> توصيل
+                </label>
             </div>
         </div>
     </div>
 
-    <script>
-        const contactData = {
-            fullName: "عبدالله البلوشي",
-            phone: "0555822559",
-            email: "abdullah@basqat.com.sa",
-            company: "باسقات الجزيرة للتمور والحلويات",
-            jobTitle: "منسق المعرض",
-            website: "https://basiqataljazira.com/ar"
-        };
+    <div class="section">عملية الدفع</div>
+    <div class="check-grid">
+        <label class="checkbox-box" onclick="selectPayment(this, 'full')">
+            <input type="radio" name="pay" class="no-print"> كامل المبلغ
+        </label>
+        <label class="checkbox-box" onclick="selectPayment(this, 'partial')">
+            <input type="radio" name="pay" class="no-print"> جزء من المبلغ
+        </label>
+    </div>
+    <div id="rem-box" class="payment-row" style="display:none;">
+        <label style="color: #8c7b5a; font-size: 11px;">المتبقي:</label>
+        <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي">
+    </div>
 
-        function getVCardString() {
-            return `BEGIN:VCARD
-VERSION:3.0
-FN:${contactData.fullName}
-ORG:${contactData.company}
-TITLE:${contactData.jobTitle}
-TEL;TYPE=CELL:${contactData.phone}
-EMAIL:${contactData.email}
-URL:${contactData.website}
-END:VCARD`;
-        }
+    <div class="signature-area">
+        <span>توقيع العميل: ..........................</span>
+    </div>
 
-        function isIOS() {
-            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        }
+    <button class="btn-print no-print" onclick="window.print()">🖨️ طباعة النموذج</button>
+</div>
 
-        document.getElementById('saveVcfBtn').addEventListener('click', function() {
-            const vcfData = getVCardString();
-            const blob = new Blob([vcfData], { type: 'text/vcard' });
-            const url = URL.createObjectURL(blob);
-            
-            if (isIOS()) {
-                window.location.href = url;
-                setTimeout(() => {
-                    URL.revokeObjectURL(url);
-                }, 1000);
-            } else {
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'abdullah_basqat.vcf';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                const msgDiv = document.getElementById('androidMessage');
-                msgDiv.classList.add('show');
-                
-                setTimeout(() => {
-                    msgDiv.classList.remove('show');
-                }, 8000);
+<script>
+    // التاريخ
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('today-date').value = new Date().toLocaleDateString('ar-SA', options);
+    
+    function updateDeliveryDate(val) {
+        if (!val) return;
+        const date = new Date(val);
+        document.getElementById('delivery-date-display').value = date.toLocaleDateString('ar-SA', options);
+    }
+    
+    // رفع الصور
+    function setupCamera(inputId, previewId) {
+        document.getElementById(inputId).addEventListener('change', function(e) {
+            const preview = document.getElementById(previewId);
+            const files = e.target.files;
+            for(let i=0; i<files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(files[i]);
             }
         });
-    </script>
+    }
+    setupCamera('tray-upload', 'tray-preview');
+    setupCamera('items-upload', 'items-preview');
+    
+    // اختيارات الاستلام
+    function selectDelivery(element, type) {
+        const allBoxes = document.querySelectorAll('.checkbox-box');
+        allBoxes.forEach(box => {
+            box.style.backgroundColor = '#f5f5f5';
+            box.style.color = 'black';
+        });
+        element.style.backgroundColor = type === 'store' ? '#e8f5e9' : '#ffebee';
+        element.style.color = type === 'store' ? 'green' : 'red';
+    }
+    
+    // اختيارات الدفع
+    function selectPayment(element, type) {
+        const allBoxes = document.querySelectorAll('.check-grid .checkbox-box');
+        allBoxes.forEach(box => {
+            box.style.backgroundColor = '#f5f5f5';
+            box.style.color = 'black';
+        });
+        element.style.backgroundColor = type === 'full' ? '#e8f5e9' : '#ffebee';
+        element.style.color = type === 'full' ? 'green' : 'red';
+        
+        const remBox = document.getElementById('rem-box');
+        remBox.style.display = type === 'partial' ? 'flex' : 'none';
+    }
+</script>
 </body>
 </html>
