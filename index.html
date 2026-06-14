@@ -47,9 +47,10 @@
             flex-wrap: wrap;
         }
 
+        /* تكبير حجم اللوجو */
         .logo-img {
-            max-width: 55px;
-            max-height: 55px;
+            max-width: 80px;
+            max-height: 80px;
             object-fit: contain;
         }
 
@@ -236,10 +237,10 @@
             margin-top: 8px;
         }
 
+        /* منطقة التوقيع - بدون border-top (بدون تذييل) */
         .signature-area {
             margin-top: 15px;
-            border-top: 1px solid #000;
-            padding-top: 10px;
+            padding-top: 5px;
             font-weight: bold;
             font-size: 13px;
         }
@@ -279,9 +280,10 @@
             .header {
                 gap: 8px;
             }
+            /* تكبير اللوجو للجوال أيضاً */
             .logo-img {
-                max-width: 40px;
-                max-height: 40px;
+                max-width: 60px;
+                max-height: 60px;
             }
             .header h2 {
                 font-size: 16px;
@@ -340,7 +342,7 @@
 
 <div class="page">
     <div class="page-content">
-        <!-- الرأس مع اللوجو بجانب العنوان -->
+        <!-- الرأس مع اللوجو بجانب العنوان (اللوجو مكبر) -->
         <div class="header">
             <img src="logo.png" alt="شعار الشركة" class="logo-img" onerror="this.style.display='none'">
             <h2>طلب العميل</h2>
@@ -419,6 +421,7 @@
             <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي" style="width: 200px;">
         </div>
 
+        <!-- منطقة التوقيع - بدون خط علوي -->
         <div class="signature-area">
             ✍️ توقيع العميل: ................................................
         </div>
