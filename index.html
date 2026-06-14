@@ -1,238 +1,353 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طلب العميل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>باسقات الجزيرة للتمور والحلويات - عبدالله البلوشي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @page { size: A4; margin: 0.3in; }
-        body { font-family: sans-serif; background: #eee; margin: 0; padding: 10px; display: flex; justify-content: center; }
-        
-        .page { 
-            width: 100%; 
-            max-width: 190mm; 
-            background: #fff; 
-            padding: 10px; 
-            box-sizing: border-box; 
-            border: 1px solid #ccc;
-            min-height: 270mm;
-            overflow: hidden;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .header { text-align: center; border-bottom: 2px solid #8c7b5a; padding-bottom: 5px; margin-bottom: 10px; }
-        .header img { max-width: 80px; display: block; margin: 0 auto 5px; }
-        .header h2 { margin: 0; font-size: 18px; }
 
-        .grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px; }
-        @media (min-width: 400px) { .grid { grid-template-columns: 1fr 1fr; } }
-        
-        label { font-weight: bold; font-size: 13px; display: block; margin-bottom: 2px; }
-        input, textarea { padding: 8px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; font-size: 14px; border-radius: 5px; }
-        
-        .invalid { border-color: red !important; background-color: #fff6f6; }
-        .valid { border-color: green !important; }
+        body {
+            background: linear-gradient(135deg, #1e2a1a, #3a4d30);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            direction: rtl;
+            padding: 20px;
+        }
 
-        .section { font-weight: bold; background: #f9f9f9; padding: 6px; border-right: 4px solid #8c7b5a; margin: 8px 0; font-size: 13px; }
-        
-        .photo-area { display: flex; flex-wrap: wrap; gap: 5px; min-height: 60px; border: 1px dashed #ccc; padding: 5px; }
-        .img-wrapper { position: relative; width: 60px; height: 60px; }
-        .img-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
-        .del-btn { position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 12px; text-align: center; line-height: 16px; cursor: pointer; font-weight: bold; }
-        
-        .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .btn-opt { padding: 10px; border: 1px solid #ccc; text-align: center; cursor: pointer; font-weight: bold; font-size: 12px; border-radius: 5px; }
-        
-        /* تنسيق مربع باركود الواتساب */
-        .wa-box { display: none; text-align: center; margin-top: 5px; border: 1px dashed #25D366; padding: 5px; border-radius: 5px; background: #f0fff4; }
-        .wa-box span { font-size: 11px; font-weight: bold; color: #25D366; display: block; margin-bottom: 3px; }
-        .wa-box img { width: 50px; height: 50px; display: block; margin: 0 auto; }
+        .business-card {
+            width: 650px;
+            max-width: 100%;
+            background: #FFFFFF;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: transform 0.25s ease;
+        }
 
-        /* -- إعدادات الطباعة -- */
-        @media print { 
-            @page { size: A4 portrait; margin: 0; } 
-            
-            body { margin: 0; padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .no-print, .del-btn { display: none !important; } 
-            
-            .page { 
-                border: none; 
-                margin: 0; 
-                padding: 10mm; 
-                height: 297mm; 
-                max-height: 297mm;
-                max-width: 100%; 
-                box-shadow: none; 
-                overflow: hidden; 
-                page-break-after: avoid; 
-                page-break-inside: avoid;
+        .business-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #8B7D3C, #C9A96E);
+            padding: 22px 25px;
+            text-align: center;
+        }
+
+        .logo-text {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: rgba(255,255,240,0.95);
+            margin-top: 6px;
+            font-weight: 400;
+        }
+
+        .card-body {
+            padding: 28px 30px;
+            background: #FFFFFF;
+        }
+
+        .contact-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2c2c2c;
+            border-right: 5px solid #8B7D3C;
+            padding-right: 16px;
+            margin-bottom: 8px;
+        }
+
+        .job-title {
+            font-size: 1rem;
+            color: #8B7D3C;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding-right: 21px;
+            letter-spacing: 0.3px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            background: #F5F0E6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B7D3C;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .info-text {
+            flex: 1;
+            font-size: 1rem;
+            color: #2d2d2d;
+            text-decoration: none;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .info-text a {
+            text-decoration: none;
+            color: #2d2d2d;
+            transition: color 0.2s;
+        }
+
+        .info-text a:hover {
+            color: #C9A96E;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1da15a;
+        }
+
+        .vcf-btn {
+            background-color: #8B7D3C;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .vcf-btn:hover {
+            background-color: #6b5e2e;
+            transform: scale(0.97);
+        }
+
+        .website-link {
+            background: none;
+            border: 1px solid #8B7D3C;
+            color: #8B7D3C !important;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .website-link:hover {
+            background: #C9A96E20;
+            border-color: #C9A96E;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(to left, #e0d5c0, #8B7D3C, #e0d5c0);
+            border-radius: 5px;
+        }
+
+        .footer-note {
+            font-size: 0.7rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        /* رسالة إرشادية لأندرويد */
+        .android-message {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 16px;
+            margin: 15px 0;
+            border-right: 4px solid #8B7D3C;
+            display: none;
+        }
+
+        .android-message.show {
+            display: block;
+        }
+
+        .android-message p {
+            color: #2c2c2c;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 500px) {
+            .card-body {
+                padding: 20px;
             }
-
-            .header { margin-bottom: 5px; padding-bottom: 5px; }
-            .section { margin: 5px 0; padding: 4px; font-size: 12px; }
-            .grid { gap: 6px; margin-bottom: 6px; }
-            input, textarea { padding: 6px; }
-            .photo-area { min-height: 50px; }
-            /* إظهار باركود الواتساب بوضوح عند الطباعة */
-            .wa-box { background: transparent; border-color: #000; }
-            .wa-box span { color: #000; }
+            .contact-name {
+                font-size: 1.4rem;
+            }
+            .info-icon {
+                width: 38px;
+                height: 38px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="business-card">
+        <div class="card-header">
+            <div class="logo-text">باسقات الجزيرة</div>
+            <div class="logo-sub">BASQAT ALJAZEERA</div>
+        </div>
+        <div class="card-body">
+            <div class="contact-name">عبدالله البلوشي</div>
+            <div class="job-title">منسق المعرض</div>
 
-<div class="page">
-    <div class="header">
-        <img src="logo.png" alt="شعار المتجر" onerror="this.style.display='none'">
-        <h2>طلب العميل</h2>
-    </div>
+            <!-- حفظ VCF -->
+            <div class="info-row">
+                <div class="info-icon"><i class="fas fa-address-card"></i></div>
+                <div class="info-text">
+                    <button class="vcf-btn" id="saveVcfBtn">
+                        <i class="fas fa-download"></i> حفظ جهة اتصال (VCF)
+                    </button>
+                </div>
+            </div>
 
-    <div class="grid">
-        <div class="form-group"><label>تاريخ اليوم:</label><input type="text" id="today" readonly></div>
-        
-        <div class="form-group"><label>تاريخ الاستلام:</label>
-            <div style="position: relative;">
-                <input type="text" id="delivery-date-display" placeholder="اختر التاريخ..." readonly>
-                <input type="date" class="no-print" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="updateDeliveryDate(this.value)">
+            <!-- رسالة إرشادية لأندرويد -->
+            <div id="androidMessage" class="android-message">
+                <p><i class="fas fa-info-circle"></i> <strong>طريقة حفظ جهة الاتصال على أندرويد:</strong></p>
+                <p>1️⃣ سيتم تحميل الملف إلى مجلد "Downloads"<br>
+                2️⃣ افتح تطبيق <strong>جهات الاتصال</strong> ← <strong>استيراد</strong> ← اختر الملف المحمّل</p>
+            </div>
+
+            <!-- واتساب -->
+            <div class="info-row">
+                <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="info-text">
+                    <a href="https://wa.me/966555822559?text=مرحباً%20عبدالله،%20تواصلت%20معك%20من%20البطاقة%20التعريفية" target="_blank" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> واتساب المباشر
+                    </a>
+                </div>
+            </div>
+
+            <!-- البريد الإلكتروني -->
+            <div class="info-row">
+                <div class="info-icon"><i class="far fa-envelope"></i></div>
+                <div class="info-text">
+                    <a href="mailto:abdullah@basqat.com.sa">abdullah@basqat.com.sa</a>
+                </div>
+            </div>
+
+            <!-- موقع الويب -->
+            <div class="info-row">
+                <div class="info-icon"><i class="fas fa-globe"></i></div>
+                <div class="info-text">
+                    <a href="https://basiqataljazira.com/ar" target="_blank" class="website-link">
+                        <i class="fas fa-external-link-alt"></i> اكتشف أكثر
+                    </a>
+                </div>
+            </div>
+
+            <hr />
+            <div class="footer-note">
+                <i class="fas fa-tree"></i> باسقات الجزيرة للتمور والحلويات
             </div>
         </div>
-
-        <div class="form-group"><label>اسم العميل:</label><input type="text"></div>
-        <div class="form-group">
-            <label>الجوال:</label>
-            <input type="tel" id="phone" maxlength="10" placeholder="05xxxxxxxx" oninput="validatePhone(this)">
-            
-            <div class="wa-box" id="wa-container">
-                <span>📱 واتساب العميل</span>
-                <img id="wa-qr" src="" alt="QR">
-            </div>
-        </div>
     </div>
 
-    <div class="section">الصواني</div>
-    <input type="file" accept="image/*" class="no-print camera-input" onchange="readImage(this, 'tray-box')">
-    <div class="photo-area" id="tray-box"></div>
+    <script>
+        // بيانات الاتصال
+        const contactData = {
+            fullName: "عبدالله البلوشي",
+            phone: "0555822559",  // رقم بدون رمز دولة
+            email: "abdullah@basqat.com.sa",
+            company: "باسقات الجزيرة للتمور والحلويات",
+            jobTitle: "منسق المعرض",
+            website: "https://basiqataljazira.com/ar"
+        };
 
-    <div class="section">الأصناف (صور)</div>
-    <input type="file" accept="image/*" class="no-print camera-input" onchange="readImage(this, 'item-box')">
-    <div class="photo-area" id="item-box"></div>
-
-    <div class="section">الأصناف (كتابياً)</div>
-    <textarea rows="2"></textarea>
-
-    <div class="section">الملاحظات</div>
-    <textarea rows="2"></textarea>
-
-    <div class="grid">
-        <div class="form-group"><label>الموظف المسؤول:</label><input type="text"></div>
-        <div class="form-group"><label>طريقة الاستلام:</label>
-            <div class="check-grid">
-                <div class="btn-opt" id="d1" onclick="toggle('d1', 'd2', '#e8f5e9', 'green')">استلام بالمعرض</div>
-                <div class="btn-opt" id="d2" onclick="toggle('d2', 'd1', '#ffebee', 'red')">توصيل</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">عملية الدفع</div>
-    <div class="check-grid">
-        <div class="btn-opt" id="p1" onclick="toggle('p1', 'p2', '#e8f5e9', 'green'); document.getElementById('rem').style.display='none'">كامل المبلغ</div>
-        <div class="btn-opt" id="p2" onclick="toggle('p2', 'p1', '#ffebee', 'red'); document.getElementById('rem').style.display='block'">جزء من المبلغ</div>
-    </div>
-    <div id="rem" style="display:none; margin-top:5px;"><input type="text" placeholder="المتبقي..."></div>
-
-    <div style="margin-top:15px; border-top: 1px solid #000; padding-top:5px; font-size: 13px;">
-        توقيع العميل: ................................................
-    </div>
-    <button class="no-print" style="width:100%; padding:12px; margin-top:10px; background:#8c7b5a; color:#fff; border:none; cursor:pointer; border-radius:5px;" onclick="window.print()">طباعة النموذج</button>
-</div>
-
-<script>
-    function formatDate(date) {
-        const days = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-        let dayName = days[date.getDay()];
-        let d = String(date.getDate()).padStart(2, '0');
-        let m = String(date.getMonth() + 1).padStart(2, '0');
-        let y = date.getFullYear();
-        return `${dayName} - ${d}/${m}/${y}`;
-    }
-
-    document.getElementById('today').value = formatDate(new Date());
-
-    function validatePhone(input) {
-        // السماح بالأرقام فقط
-        input.value = input.value.replace(/[^0-9]/g, '');
-        
-        const waContainer = document.getElementById('wa-container');
-        const waQr = document.getElementById('wa-qr');
-
-        // التحقق إذا كان الرقم 10 خانات ويبدأ بـ 05
-        if (input.value.length === 10 && input.value.startsWith('05')) {
-            input.classList.remove('invalid');
-            input.classList.add('valid');
-            
-            // تحويل الرقم إلى الصيغة الدولية للواتساب (السعودية 966)
-            let internationalNumber = '966' + input.value.substring(1);
-            let waLink = `https://wa.me/${internationalNumber}`;
-            
-            // توليد الباركود وعرض المربع
-            waQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(waLink)}`;
-            waContainer.style.display = 'block';
-        } else {
-            input.classList.remove('valid');
-            input.classList.add('invalid');
-            waContainer.style.display = 'none';
-            waQr.src = '';
+        // إنشاء نص vCard
+        function getVCardString() {
+            return `BEGIN:VCARD
+VERSION:3.0
+FN:${contactData.fullName}
+ORG:${contactData.company}
+TITLE:${contactData.jobTitle}
+TEL;TYPE=CELL:${contactData.phone}
+EMAIL:${contactData.email}
+URL:${contactData.website}
+END:VCARD`;
         }
-    }
 
-    function updateDeliveryDate(val) {
-        if (!val) return;
-        const [year, month, day] = val.split('-');
-        const dateObj = new Date(year, month - 1, day);
-        document.getElementById('delivery-date-display').value = formatDate(dateObj);
-    }
-
-    function readImage(input, containerId) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'img-wrapper';
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                const delBtn = document.createElement('div');
-                delBtn.className = 'del-btn';
-                delBtn.innerHTML = '×';
-                delBtn.onclick = function() { 
-                    wrapper.remove(); 
-                    input.value = ''; 
-                };
-                wrapper.appendChild(img);
-                wrapper.appendChild(delBtn);
-                document.getElementById(containerId).appendChild(wrapper);
-            }
-            reader.readAsDataURL(input.files[0]);
+        // التحقق من نظام التشغيل
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         }
-    }
 
-    function toggle(sId, oId, color, border) {
-        document.getElementById(sId).style.backgroundColor = color;
-        document.getElementById(sId).style.borderColor = border;
-        document.getElementById(oId).style.backgroundColor = 'transparent';
-        document.getElementById(oId).style.borderColor = '#ccc';
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        var cameraInputs = document.querySelectorAll('.camera-input');
-        
-        cameraInputs.forEach(function(input) {
-            if (!isIOS) {
-                input.setAttribute('capture', 'environment');
+        // زر حفظ VCF
+        document.getElementById('saveVcfBtn').addEventListener('click', function() {
+            const vcfData = getVCardString();
+            const blob = new Blob([vcfData], { type: 'text/vcard' });
+            const url = URL.createObjectURL(blob);
+            
+            if (isIOS()) {
+                // iOS: فتح الملف مباشرة
+                window.location.href = url;
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                }, 1000);
             } else {
-                input.removeAttribute('capture');
+                // Android والأنظمة الأخرى: تحميل الملف مع إظهار رسالة إرشادية
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'abdullah_basqat.vcf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // إظهار رسالة أندرويد
+                const msgDiv = document.getElementById('androidMessage');
+                msgDiv.classList.add('show');
+                
+                // إخفاء الرسالة بعد 8 ثوانٍ
+                setTimeout(() => {
+                    msgDiv.classList.remove('show');
+                }, 8000);
             }
         });
-    });
-</script>
+    </script>
 </body>
 </html>
