@@ -35,20 +35,21 @@
             padding: 0.3cm;
         }
 
+        /* رأس الصفحة - اللوجو بجانب العنوان */
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             border-bottom: 3px solid #8B7D3C;
             padding-bottom: 8px;
             margin-bottom: 12px;
-        }
-
-        .logo-area {
-            margin-bottom: 5px;
+            flex-wrap: wrap;
         }
 
         .logo-img {
-            max-width: 70px;
-            max-height: 70px;
+            max-width: 55px;
+            max-height: 55px;
             object-fit: contain;
         }
 
@@ -275,6 +276,16 @@
                 top: -6px;
                 right: -6px;
             }
+            .header {
+                gap: 8px;
+            }
+            .logo-img {
+                max-width: 40px;
+                max-height: 40px;
+            }
+            .header h2 {
+                font-size: 16px;
+            }
         }
 
         @media print {
@@ -329,10 +340,9 @@
 
 <div class="page">
     <div class="page-content">
+        <!-- الرأس مع اللوجو بجانب العنوان -->
         <div class="header">
-            <div class="logo-area">
-                <img src="logo.png" alt="شعار الشركة" class="logo-img" onerror="this.style.display='none'">
-            </div>
+            <img src="logo.png" alt="شعار الشركة" class="logo-img" onerror="this.style.display='none'">
             <h2>طلب العميل</h2>
         </div>
 
@@ -371,10 +381,11 @@
         <input type="file" accept="image/*" id="itemsUpload" class="no-print" multiple>
         <div class="img-box" id="itemsPreview"></div>
 
-        <!-- تم إلغاء قسم "الأصناف كتابياً" -->
+        <div class="section">📝 الأصناف (كتابياً)</div>
+        <textarea rows="2" id="itemsText" placeholder="اكتب الأصناف المطلوبة..."></textarea>
 
         <div class="section">📌 الملاحظات</div>
-        <textarea rows="4" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
+        <textarea rows="2" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
 
         <div class="grid">
             <div class="form-group">
@@ -451,16 +462,18 @@
         todayField.value = formatGregorianDateWithDay(today);
     }
 
-    // ================= تاريخ الاستلام =================
+    // ================= تاريخ الاستلام (خانة واحدة مع زر التقويم) =================
     const deliveryPicker = document.getElementById('deliveryDatePicker');
     const deliveryDisplay = document.getElementById('deliveryDateDisplay');
     
+    // تعيين تاريخ اليوم كقيمة افتراضية
     const todayStr = today.toISOString().split('T')[0];
     if (deliveryPicker) {
         deliveryPicker.value = todayStr;
         deliveryDisplay.value = formatGregorianDateWithDay(today);
     }
     
+    // عند تغيير التاريخ من منتقي التقويم
     if (deliveryPicker) {
         deliveryPicker.addEventListener('change', function() {
             if (this.value) {
@@ -543,6 +556,8 @@
     
     setupImageUpload('trayUpload', 'trayPreview');
     setupImageUpload('itemsUpload', 'itemsPreview');
+    
+    // تفعيل دعم الكاميرا عند تحميل الصفحة
     setupCameraSupport();
 
     // ================= اختيارات الاستلام =================
