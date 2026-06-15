@@ -76,6 +76,19 @@
             width: 100%;
             box-sizing: border-box;
             background: white;
+            transition: all 0.2s ease;
+        }
+
+        /* حالة تنبيه - رقم ناقص (أقل من 10 أرقام) */
+        input.phone-invalid {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+
+        /* حالة صحيحة - رقم كامل 10 أرقام */
+        input.phone-valid {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
         }
 
         input[readonly] {
@@ -241,28 +254,6 @@
             border-color: red;
         }
 
-        .wa-box {
-            display: none;
-            text-align: center;
-            margin-top: 8px;
-            padding: 6px;
-            background: #e8f5e9;
-            border-radius: 10px;
-            border: 1px solid #25D366;
-        }
-
-        .wa-box span {
-            font-size: 10px;
-            font-weight: bold;
-            color: #25D366;
-        }
-
-        .wa-box img {
-            width: 60px;
-            height: 60px;
-            margin: 5px auto;
-        }
-
         .payment-row {
             display: flex;
             align-items: center;
@@ -402,10 +393,6 @@
             <div class="form-group">
                 <label>📱 الجوال:</label>
                 <input type="tel" id="customerPhone" maxlength="10" placeholder="05xxxxxxxx">
-                <div class="wa-box" id="waContainer">
-                    <span>📱 باركود واتساب العميل</span>
-                    <img id="waQR" alt="QR Code">
-                </div>
             </div>
         </div>
 
@@ -423,7 +410,7 @@
         <div class="section">📌 الملاحظات</div>
         <textarea rows="2" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
 
-        <!-- ===== الموظف المسؤول وطريقة الاستلام في نفس السطر ===== -->
+        <!-- الموظف المسؤول وطريقة الاستلام في نفس السطر -->
         <div class="employee-delivery-row">
             <div class="employee-box">
                 <label>👨‍💼 الموظف المسؤول:</label>
@@ -442,7 +429,7 @@
             </div>
         </div>
 
-        <!-- ===== عملية الدفع - قسم مستقل ===== -->
+        <!-- عملية الدفع - قسم مستقل -->
         <div class="section">💰 عملية الدفع</div>
         <div class="options-group">
             <label class="option-item option-payment-full" onclick="selectPayment(this, 'full')">
@@ -504,24 +491,31 @@
         }
     });
 
-    // باركود واتساب
+    // ================= تنبيه رقم الجوال =================
     const phoneInput = document.getElementById('customerPhone');
-    const waContainer = document.getElementById('waContainer');
-    const waQR = document.getElementById('waQR');
     
-    phoneInput.addEventListener('input', function() {
-        let value = this.value.replace(/[^0-9]/g, '');
-        this.value = value;
-        if (value.length === 10 && value.startsWith('05')) {
-            const internationalNumber = '966' + value.substring(1);
-            const waLink = `https://wa.me/${internationalNumber}`;
-            waQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(waLink)}`;
-            waContainer.style.display = 'block';
+    function validatePhone() {
+        let value = phoneInput.value.replace(/[^0-9]/g, '');
+        phoneInput.value = value;
+        
+        // إزالة الكلاسات السابقة
+        phoneInput.classList.remove('phone-valid', 'phone-invalid');
+        
+        if (value.length === 0) {
+            // حقل فارغ - بدون لون
+            phoneInput.style.backgroundColor = 'white';
+        } else if (value.length === 10) {
+            // رقم كامل 10 أرقام - أخضر
+            phoneInput.classList.add('phone-valid');
         } else {
-            waContainer.style.display = 'none';
-            waQR.src = '';
+            // رقم ناقص - أحمر
+            phoneInput.classList.add('phone-invalid');
         }
-    });
+    }
+    
+    phoneInput.addEventListener('input', validatePhone);
+    // تنفيذ مرة واحدة عند التحميل للتأكد من الحالة الأولية
+    validatePhone();
 
     // دعم الكاميرا
     function setupCameraSupport() {
