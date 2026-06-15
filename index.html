@@ -35,17 +35,12 @@
             padding: 0.3cm;
         }
 
-        /* رأس الصفحة - اللوجو بجانب العنوان */
         .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            text-align: center;
             border-bottom: 3px solid #8B7D3C;
             padding-bottom: 8px;
             margin-bottom: 12px;
-            flex-wrap: wrap;
-        
+        }
 
         .header h2 {
             font-size: 20px;
@@ -87,7 +82,6 @@
             background-color: #f5f5f5;
         }
 
-        /* حاوية التاريخ - خانة واحدة مع زر التقويم */
         .date-wrapper {
             position: relative;
             display: flex;
@@ -174,31 +168,77 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        .check-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        /* خيارات منفصلة ومستقلة */
+        .options-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
             margin-top: 5px;
         }
 
-        .checkbox-box {
-            padding: 8px;
-            border: 1px solid #bbb;
-            border-radius: 8px;
+        .option-item {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
             cursor: pointer;
             font-size: 13px;
             font-weight: bold;
+            padding: 6px 15px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
             background: #f5f5f5;
+            transition: all 0.2s ease;
         }
 
-        .checkbox-box input {
+        .option-item input {
             width: 16px;
             height: 16px;
             margin: 0;
+            cursor: pointer;
+        }
+
+        /* صف الموظف وطريقة الاستلام */
+        .employee-delivery-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .employee-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .delivery-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ألوان الخيارات */
+        .option-store.selected {
+            background-color: #e8f5e9;
+            color: green;
+            border-color: green;
+        }
+
+        .option-delivery.selected {
+            background-color: #ffebee;
+            color: red;
+            border-color: red;
+        }
+
+        .option-payment-full.selected {
+            background-color: #e8f5e9;
+            color: green;
+            border-color: green;
+        }
+
+        .option-payment-partial.selected {
+            background-color: #ffebee;
+            color: red;
+            border-color: red;
         }
 
         .wa-box {
@@ -230,10 +270,10 @@
             margin-top: 8px;
         }
 
-        /* منطقة التوقيع - بدون border-top (بدون تذييل) */
         .signature-area {
             margin-top: 15px;
-            padding-top: 5px;
+            border-top: 1px solid #000;
+            padding-top: 10px;
             font-weight: bold;
             font-size: 13px;
         }
@@ -259,6 +299,10 @@
                 grid-template-columns: 1fr;
                 gap: 8px;
             }
+            .employee-delivery-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
             .img-wrapper {
                 width: 100px;
                 height: 100px;
@@ -270,16 +314,15 @@
                 top: -6px;
                 right: -6px;
             }
-            .header {
-                gap: 8px;
-            }
-            /* تكبير اللوجو للجوال أيضاً */
-            .logo-img {
-                max-width: 60px;
-                max-height: 60px;
-            }
             .header h2 {
                 font-size: 16px;
+            }
+            .options-group {
+                gap: 10px;
+            }
+            .option-item {
+                padding: 4px 10px;
+                font-size: 12px;
             }
         }
 
@@ -310,7 +353,7 @@
                 width: 120px;
                 height: 120px;
             }
-            .checkbox-box {
+            .option-item {
                 border: 1px solid #000;
                 background: transparent !important;
                 color: black !important;
@@ -335,10 +378,8 @@
 
 <div class="page">
     <div class="page-content">
-        <!-- الرأس مع اللوجو بجانب العنوان (اللوجو مكبر) -->
         <div class="header">
-            <img src="logo.png" alt="شعار الشركة" class="logo-img" onerror="this.style.display='none'">
-            <h2>طلب العميل</h2>
+            <h2>باسقات الجزيرة - طلب العميل</h2>
         </div>
 
         <div class="grid">
@@ -382,39 +423,40 @@
         <div class="section">📌 الملاحظات</div>
         <textarea rows="2" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
 
-        <div class="grid">
-            <div class="form-group">
+        <!-- ===== الموظف المسؤول وطريقة الاستلام في نفس السطر ===== -->
+        <div class="employee-delivery-row">
+            <div class="employee-box">
                 <label>👨‍💼 الموظف المسؤول:</label>
                 <input type="text" id="employeeName" placeholder="اسم الموظف">
             </div>
-            <div class="form-group">
+            <div class="delivery-box">
                 <label>🚚 طريقة الاستلام:</label>
-                <div class="check-grid">
-                    <div class="checkbox-box" onclick="selectDelivery(this, 'store')">
+                <div class="options-group">
+                    <label class="option-item option-store" onclick="selectDelivery(this, 'store')">
                         <input type="radio" name="delivery" class="no-print"> استلام بالمعرض
-                    </div>
-                    <div class="checkbox-box" onclick="selectDelivery(this, 'delivery')">
+                    </label>
+                    <label class="option-item option-delivery" onclick="selectDelivery(this, 'delivery')">
                         <input type="radio" name="delivery" class="no-print"> توصيل
-                    </div>
+                    </label>
                 </div>
             </div>
         </div>
 
+        <!-- ===== عملية الدفع - قسم مستقل ===== -->
         <div class="section">💰 عملية الدفع</div>
-        <div class="check-grid">
-            <div class="checkbox-box" onclick="selectPayment(this, 'full')">
-                <input type="radio" name="pay" class="no-print"> كامل المبلغ
-            </div>
-            <div class="checkbox-box" onclick="selectPayment(this, 'partial')">
-                <input type="radio" name="pay" class="no-print"> جزء من المبلغ
-            </div>
+        <div class="options-group">
+            <label class="option-item option-payment-full" onclick="selectPayment(this, 'full')">
+                <input type="radio" name="payment" class="no-print"> كامل المبلغ
+            </label>
+            <label class="option-item option-payment-partial" onclick="selectPayment(this, 'partial')">
+                <input type="radio" name="payment" class="no-print"> جزء من المبلغ
+            </label>
         </div>
         <div id="remBox" class="payment-row" style="display:none;">
             <label style="font-weight: bold;">المتبقي:</label>
             <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي" style="width: 200px;">
         </div>
 
-        <!-- منطقة التوقيع - بدون خط علوي -->
         <div class="signature-area">
             ✍️ توقيع العميل: ................................................
         </div>
@@ -426,13 +468,8 @@
 <script>
     // ================= أيام الأسبوع =================
     const weekDays = {
-        'Sunday': 'الأحد',
-        'Monday': 'الاثنين',
-        'Tuesday': 'الثلاثاء',
-        'Wednesday': 'الأربعاء',
-        'Thursday': 'الخميس',
-        'Friday': 'الجمعة',
-        'Saturday': 'السبت'
+        'Sunday': 'الأحد', 'Monday': 'الاثنين', 'Tuesday': 'الثلاثاء',
+        'Wednesday': 'الأربعاء', 'Thursday': 'الخميس', 'Friday': 'الجمعة', 'Saturday': 'السبت'
     };
 
     function getDayName(date) {
@@ -440,7 +477,6 @@
         return weekDays[day] || day;
     }
 
-    // ================= تنسيق التاريخ مع اليوم =================
     function formatGregorianDateWithDay(date) {
         const day = date.getDate();
         const month = date.getMonth() + 1;
@@ -451,63 +487,46 @@
         return `${dayName} - ${dayStr}/${monthStr}/${year}`;
     }
 
-    // ================= تاريخ اليوم =================
+    // تاريخ اليوم
     const today = new Date();
-    const todayField = document.getElementById('todayDate');
-    if (todayField) {
-        todayField.value = formatGregorianDateWithDay(today);
-    }
+    document.getElementById('todayDate').value = formatGregorianDateWithDay(today);
 
-    // ================= تاريخ الاستلام (خانة واحدة مع زر التقويم) =================
+    // تاريخ الاستلام
     const deliveryPicker = document.getElementById('deliveryDatePicker');
     const deliveryDisplay = document.getElementById('deliveryDateDisplay');
-    
-    // تعيين تاريخ اليوم كقيمة افتراضية
     const todayStr = today.toISOString().split('T')[0];
-    if (deliveryPicker) {
-        deliveryPicker.value = todayStr;
-        deliveryDisplay.value = formatGregorianDateWithDay(today);
-    }
+    deliveryPicker.value = todayStr;
+    deliveryDisplay.value = formatGregorianDateWithDay(today);
     
-    // عند تغيير التاريخ من منتقي التقويم
-    if (deliveryPicker) {
-        deliveryPicker.addEventListener('change', function() {
-            if (this.value) {
-                const selectedDate = new Date(this.value);
-                deliveryDisplay.value = formatGregorianDateWithDay(selectedDate);
-            } else {
-                deliveryDisplay.value = '';
-            }
-        });
-    }
+    deliveryPicker.addEventListener('change', function() {
+        if (this.value) {
+            deliveryDisplay.value = formatGregorianDateWithDay(new Date(this.value));
+        }
+    });
 
-    // ================= باركود واتساب =================
+    // باركود واتساب
     const phoneInput = document.getElementById('customerPhone');
     const waContainer = document.getElementById('waContainer');
     const waQR = document.getElementById('waQR');
     
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function() {
-            let value = this.value.replace(/[^0-9]/g, '');
-            this.value = value;
-            
-            if (value.length === 10 && value.startsWith('05')) {
-                const internationalNumber = '966' + value.substring(1);
-                const waLink = `https://wa.me/${internationalNumber}`;
-                waQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(waLink)}`;
-                waContainer.style.display = 'block';
-            } else {
-                waContainer.style.display = 'none';
-                waQR.src = '';
-            }
-        });
-    }
+    phoneInput.addEventListener('input', function() {
+        let value = this.value.replace(/[^0-9]/g, '');
+        this.value = value;
+        if (value.length === 10 && value.startsWith('05')) {
+            const internationalNumber = '966' + value.substring(1);
+            const waLink = `https://wa.me/${internationalNumber}`;
+            waQR.src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(waLink)}`;
+            waContainer.style.display = 'block';
+        } else {
+            waContainer.style.display = 'none';
+            waQR.src = '';
+        }
+    });
 
-    // ================= دعم الكاميرا لأندرويد وأيفون =================
+    // دعم الكاميرا
     function setupCameraSupport() {
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
         const cameraInputs = document.querySelectorAll('input[type="file"][accept*="image"]');
-        
         cameraInputs.forEach(input => {
             if (!isIOS) {
                 input.setAttribute('capture', 'environment');
@@ -515,80 +534,92 @@
         });
     }
 
-    // ================= رفع الصور مع حذف =================
+    // رفع الصور
     function setupImageUpload(inputId, previewId) {
         const input = document.getElementById(inputId);
         const preview = document.getElementById(previewId);
         
-        if (input && preview) {
-            input.addEventListener('change', function(e) {
-                const files = Array.from(e.target.files);
-                files.forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(ev) {
-                        const wrapper = document.createElement('div');
-                        wrapper.className = 'img-wrapper';
-                        
-                        const img = document.createElement('img');
-                        img.src = ev.target.result;
-                        
-                        const deleteBtn = document.createElement('div');
-                        deleteBtn.className = 'delete-img';
-                        deleteBtn.innerHTML = '✕';
-                        deleteBtn.onclick = function() {
-                            wrapper.remove();
-                        };
-                        
-                        wrapper.appendChild(img);
-                        wrapper.appendChild(deleteBtn);
-                        preview.appendChild(wrapper);
-                    };
-                    reader.readAsDataURL(file);
-                });
-                input.value = '';
+        input.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'img-wrapper';
+                    const img = document.createElement('img');
+                    img.src = ev.target.result;
+                    const deleteBtn = document.createElement('div');
+                    deleteBtn.className = 'delete-img';
+                    deleteBtn.innerHTML = '✕';
+                    deleteBtn.onclick = () => wrapper.remove();
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(deleteBtn);
+                    preview.appendChild(wrapper);
+                };
+                reader.readAsDataURL(file);
             });
-        }
+            input.value = '';
+        });
     }
     
     setupImageUpload('trayUpload', 'trayPreview');
     setupImageUpload('itemsUpload', 'itemsPreview');
-    
-    // تفعيل دعم الكاميرا عند تحميل الصفحة
     setupCameraSupport();
 
-    // ================= اختيارات الاستلام =================
+    // ================= اختيار طريقة الاستلام =================
     function selectDelivery(element, type) {
-        const allBoxes = document.querySelectorAll('.check-grid .checkbox-box');
-        allBoxes.forEach(box => {
-            box.style.backgroundColor = '#f5f5f5';
-            box.style.color = 'black';
-            const radio = box.querySelector('input');
+        const allDeliveryOptions = document.querySelectorAll('.option-store, .option-delivery');
+        allDeliveryOptions.forEach(opt => {
+            opt.classList.remove('selected');
+            opt.style.backgroundColor = '#f5f5f5';
+            opt.style.color = 'black';
+            opt.style.borderColor = '#bbb';
+            const radio = opt.querySelector('input');
             if (radio) radio.checked = false;
         });
-        element.style.backgroundColor = type === 'store' ? '#e8f5e9' : '#ffebee';
-        element.style.color = type === 'store' ? 'green' : 'red';
+        
+        element.classList.add('selected');
+        if (type === 'store') {
+            element.style.backgroundColor = '#e8f5e9';
+            element.style.color = 'green';
+            element.style.borderColor = 'green';
+        } else {
+            element.style.backgroundColor = '#ffebee';
+            element.style.color = 'red';
+            element.style.borderColor = 'red';
+        }
+        
         const radio = element.querySelector('input');
         if (radio) radio.checked = true;
     }
 
-    // ================= اختيارات الدفع =================
+    // ================= اختيار عملية الدفع =================
     function selectPayment(element, type) {
-        const allBoxes = document.querySelectorAll('.check-grid .checkbox-box');
-        allBoxes.forEach(box => {
-            box.style.backgroundColor = '#f5f5f5';
-            box.style.color = 'black';
-            const radio = box.querySelector('input');
+        const allPaymentOptions = document.querySelectorAll('.option-payment-full, .option-payment-partial');
+        allPaymentOptions.forEach(opt => {
+            opt.classList.remove('selected');
+            opt.style.backgroundColor = '#f5f5f5';
+            opt.style.color = 'black';
+            opt.style.borderColor = '#bbb';
+            const radio = opt.querySelector('input');
             if (radio) radio.checked = false;
         });
-        element.style.backgroundColor = type === 'full' ? '#e8f5e9' : '#ffebee';
-        element.style.color = type === 'full' ? 'green' : 'red';
+        
+        element.classList.add('selected');
+        if (type === 'full') {
+            element.style.backgroundColor = '#e8f5e9';
+            element.style.color = 'green';
+            element.style.borderColor = 'green';
+            document.getElementById('remBox').style.display = 'none';
+        } else {
+            element.style.backgroundColor = '#ffebee';
+            element.style.color = 'red';
+            element.style.borderColor = 'red';
+            document.getElementById('remBox').style.display = 'flex';
+        }
+        
         const radio = element.querySelector('input');
         if (radio) radio.checked = true;
-        
-        const remBox = document.getElementById('remBox');
-        if (remBox) {
-            remBox.style.display = type === 'partial' ? 'flex' : 'none';
-        }
     }
 </script>
 </body>
