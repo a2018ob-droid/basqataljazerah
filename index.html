@@ -216,6 +216,38 @@
             flex-direction: column;
         }
 
+        /* صف الدفع - خيارات الدفع والمتبقي في نفس السطر */
+        .payment-full-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .remaining-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .remaining-field label {
+            font-weight: bold;
+            margin-bottom: 0;
+            white-space: nowrap;
+        }
+
+        .remaining-field input {
+            width: 180px;
+            padding: 8px;
+        }
+
         /* ألوان الخيارات */
         .option-store.selected {
             background-color: #e8f5e9;
@@ -263,13 +295,6 @@
             margin: 5px auto;
         }
 
-        .payment-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
         .signature-area {
             margin-top: 15px;
             border-top: 1px solid #000;
@@ -302,6 +327,14 @@
             .employee-delivery-row {
                 grid-template-columns: 1fr;
                 gap: 8px;
+            }
+            .payment-full-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .remaining-field input {
+                width: 100%;
             }
             .img-wrapper {
                 width: 100px;
@@ -423,7 +456,7 @@
         <div class="section">📌 الملاحظات</div>
         <textarea rows="2" id="notes" placeholder="أي ملاحظات إضافية..."></textarea>
 
-        <!-- ===== الموظف المسؤول وطريقة الاستلام في نفس السطر ===== -->
+        <!-- الموظف المسؤول وطريقة الاستلام في نفس السطر -->
         <div class="employee-delivery-row">
             <div class="employee-box">
                 <label>👨‍💼 الموظف المسؤول:</label>
@@ -442,19 +475,21 @@
             </div>
         </div>
 
-        <!-- ===== عملية الدفع - قسم مستقل ===== -->
+        <!-- ===== عملية الدفع - خيارات الدفع والمتبقي في نفس السطر ===== -->
         <div class="section">💰 عملية الدفع</div>
-        <div class="options-group">
-            <label class="option-item option-payment-full" onclick="selectPayment(this, 'full')">
-                <input type="radio" name="payment" class="no-print"> كامل المبلغ
-            </label>
-            <label class="option-item option-payment-partial" onclick="selectPayment(this, 'partial')">
-                <input type="radio" name="payment" class="no-print"> جزء من المبلغ
-            </label>
-        </div>
-        <div id="remBox" class="payment-row" style="display:none;">
-            <label style="font-weight: bold;">المتبقي:</label>
-            <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي" style="width: 200px;">
+        <div class="payment-full-row">
+            <div class="payment-options">
+                <label class="option-item option-payment-full" onclick="selectPayment(this, 'full')">
+                    <input type="radio" name="payment" class="no-print"> كامل المبلغ
+                </label>
+                <label class="option-item option-payment-partial" onclick="selectPayment(this, 'partial')">
+                    <input type="radio" name="payment" class="no-print"> جزء من المبلغ
+                </label>
+            </div>
+            <div id="remBox" class="remaining-field" style="display:none;">
+                <label>المتبقي:</label>
+                <input type="text" id="remainingAmount" placeholder="المبلغ المتبقي">
+            </div>
         </div>
 
         <div class="signature-area">
